@@ -1,0 +1,635 @@
+// ===========================================
+// sass/_mixins.scss
+// ===========================================
+//
+// Custom SCSS Mixins.
+// ===========================================
+
+// ===========================================
+// Table of Contents
+//
+// 01. Spacing
+// 02. Background Image
+//    i. Background Image Full
+//   ii. Background Image Only
+// 03. All Colors
+// 04. All Headings Colors
+// 05. Units
+//    i. Calculate REM
+//   ii. Calculate EM
+//  iii. Font Size
+//   iv. Margin
+//    v. Padding
+// 06. Breakpoints
+// 07. Opacity
+// 08. Vertically Centered
+// 09. Position
+// 10. Background Position
+// 11. Auto Center Vertically
+// 12. Pixel to Percentage
+// 13. Center with Width
+// 14. Grids
+// 15. Font Size Pixel to Percentage
+// 16. Remove the unit of a length
+// 17. Flexbox Container
+// 18. Primary Gradient
+// 19. Aspect Ratio
+// 20. Single Button
+//
+// ===========================================
+
+// 01. Spacing
+// ===========================================
+
+//
+// Creates spacing classes for paddings and margins
+//
+// $type      = padding, margin
+// $multiple  = 1, 2, 5, 10... ; e.g. mt5, mt10, mt15...
+// $end       = 10, 20, 50... ; Number of times loop runs.
+// $direction = top, right, bottom, left ; set the direction
+//
+
+@mixin spacing( $type, $multiple, $end, $direction ) {
+  $class: m;
+
+  @if $type == padding {
+    $class: p;
+  } @else {
+    $class: m;
+  }
+
+  @for $i from 1 through $end {
+    @if $direction == top {
+      .#{$class}t#{$multiple * $i} {
+        #{$type}-top: 1px*($multiple * $i);
+      }
+    } @else if $direction == bottom {
+      .#{$class}b#{$multiple * $i} {
+        #{$type}-bottom: 1px*($multiple * $i);
+      }
+    } @else if $direction == left {
+      .#{$class}l#{$multiple * $i} {
+        #{$type}-left: 1px*($multiple * $i);
+      }
+    } @else if $direction == right {
+      .#{$class}r#{$multiple * $i} {
+        #{$type}-left: 1px*($multiple * $i);
+      }
+    }
+  }
+}
+
+// 02. Background Image
+// ===========================================
+
+//
+// $path--image variable should be in your _variables.scss file, e.g.
+// $path--image: '../images'
+//
+
+@mixin bg-img-full( $path, $color: transparent, $repeat: no-repeat, $position: 0 0, $size: null ) {
+  background: $color url('#{$path--image}/#{$path}') $repeat $position;
+  background-size: $size;
+}
+
+@mixin bg-img-only( $path ) {
+  background-image: url('#{$path--image}/#{$path}');
+}
+
+// 03. All Colors
+// ===========================================
+
+//
+// Replace all text color inside an element.
+// Useful to use on dark background to achieve light text color
+//
+
+@mixin all-colors( $color ) {
+  color: $color;
+
+  h1, h2, h3, h4, h5, h6, a {
+    color: $color;
+  }
+}
+
+// 04. All Headings Colors
+// ===========================================
+
+//
+// Replace all headings color inside an element.
+// Useful to use on dark background to achieve light headings color
+//
+
+@mixin all-headings-colors( $color ) {
+  h1, h2, h3, h4, h5, h6 {
+    color: $color;
+  }
+}
+
+// 05. Units
+// ===========================================
+
+//
+// 05 (i). Calculate Rem
+//
+
+@function calc-rem( $size: (), $root: $font__size--root ) {
+  $size-root: $root;
+  $size_final: '';
+
+  @for $i from 1 to length($size) + 1 {
+    $n_size: nth( $size, $i ) / $size-root;
+    $size_final: join($size_final, strip-unit( $n_size ) * 1rem);
+  }
+  @return #{$size_final};
+}
+
+//
+// 05 (ii). Margin
+//
+// calculates margin in 'rem' with 'px' fallback.
+// with the option to set direction, e.g., 'margin-top'
+//
+
+@function calc-em( $size: (), $base: null ) {
+  $size-root: if( $base != null, $base, $font__size--base );
+  $size_final: '';
+
+  @for $i from 1 to length($size) + 1 {
+    $n_size: nth( $size, $i ) / $size-root;
+    $size_final: join($size_final, strip-unit( $n_size ) * 1em);
+  }
+  @return #{$size_final};
+}
+
+//
+// 05 (iii). Font Size
+//
+// calculates font size in 'rem' with 'px' fallback.
+//
+
+@mixin font-size( $size ) {
+  font-size: $size;
+  font-size: calc-rem($size);
+}
+
+//
+// 05 (iv). Margin
+//
+// calculates margin in 'rem' with 'px' fallback.
+// with the option to set direction, e.g., 'margin-top'
+//
+
+@mixin margin( $size, $dir: null ) {
+  @if $dir != null {
+    $dir: '-' + $dir;
+  }
+  margin#{$dir}: $size;
+  margin#{$dir}: calc-rem($size);
+}
+
+//
+// 05 (v). Padding
+//
+// calculates padding in 'rem' with 'px' fallback.
+// with the option to set direction, e.g., 'padding-top'
+//
+
+@mixin padding( $size, $dir: null ) {
+  @if $dir != null {
+    $dir: '-' + $dir;
+  }
+  padding#{$dir}: $size;
+  padding#{$dir}: calc-rem($size);
+}
+
+//
+// 05 (v). Size Rem
+//
+// calculates size (width & height) in 'rem'
+// with 'px' fallback.
+//
+
+@function is-size($value) {
+  @return is-length($value)
+          or contains("fill" "fit-content" "min-content" "max-content", $value);
+}
+
+@mixin size-rem($value) {
+  $width: nth($value, 1);
+  $height: $width;
+
+  @if length($value) > 1 {
+    $height: nth($value, 2);
+  }
+
+  @if is-size($height) {
+    height: $height;
+    height: calc-rem($height);
+  } @else {
+    @warn "`#{$height}` is not a valid length for the `$height` parameter in the `size` mixin.";
+  }
+
+  @if is-size($width) {
+    width: $width;
+    width: calc-rem($width);
+  } @else {
+    @warn "`#{$width}` is not a valid length for the `$width` parameter in the `size` mixin.";
+  }
+}
+
+//
+// 05 (v). Width Rem
+//
+// calculates width in 'rem' with 'px' fallback.
+//
+
+@mixin width( $width, $type: null ) {
+
+  @if $type == max {
+
+    max-width: $width;
+    max-width: calc-rem( $width );
+
+  } @else if $type == min {
+
+    min-width: $width;
+    min-width: calc-rem( $width );
+
+  } @else {
+
+    width: $width;
+    width: calc-rem( $width );
+
+  }
+
+}
+
+//
+// 05 (v). Height Rem
+//
+// calculates height in 'rem' with 'px' fallback.
+//
+
+@mixin height( $height, $type: null ) {
+
+  @if $type == max {
+
+    max-height: $height;
+    max-height: calc-rem( $height );
+
+  } @else if $type == min {
+
+    min-height: $height;
+    min-height: calc-rem( $height );
+
+  } @else {
+
+    height: $height;
+    height: calc-rem( $height );
+
+  }
+
+}
+
+// 06. Breakpoints
+// ===========================================
+
+// Media Only
+
+@mixin media( $width, $upper: false ) {
+  @if $upper == true {
+    @media screen and (min-width: $width + 1) {
+      @content;
+    }
+  } @else {
+    @media screen and (max-width: $width) {
+      @content;
+    }
+  }
+}
+
+// Max Width
+
+//
+// Default following variables in your _variabls.scss file:
+// $media-exlarge : 1400px;
+// $breakpoint__large   : 992px;
+// $breakpoint__medium  : 767px;
+// $breakpoint__small   : 480px;
+//
+
+@mixin bp-x-large {
+  @media screen and (max-width: $breakpoint__extra-large) {
+    @content;
+  }
+}
+
+@mixin bp-large {
+  @media screen and (max-width: $breakpoint__large) {
+    @content;
+  }
+}
+
+@mixin bp-medium {
+  @media screen and (max-width: $breakpoint__medium) {
+    @content;
+  }
+}
+
+@mixin bp-small {
+  @media screen and (max-width: $breakpoint__small) {
+    @content;
+  }
+}
+
+@mixin bp-x-small {
+  @media screen and (max-width: $breakpoint__extra-small) {
+    @content;
+  }
+}
+
+// Min Width
+
+@mixin bp-x-large-min {
+  @media screen and (min-width: $breakpoint__extra-large + 1) {
+    @content;
+  }
+}
+
+@mixin bp-large-min {
+  @media screen and (min-width: $breakpoint__large + 1) {
+    @content;
+  }
+}
+
+@mixin bp-medium-min {
+  @media screen and (min-width: $breakpoint__medium + 1) {
+    @content;
+  }
+}
+
+@mixin bp-small-min {
+  @media screen and (min-width: $breakpoint__small + 1) {
+    @content;
+  }
+}
+
+@mixin bp-x-small-min {
+  @media screen and (min-width: $breakpoint__small + 1) {
+    @content;
+  }
+}
+
+// 07. Opacity
+// ===========================================
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+// 08. Vertically Centered
+// ===========================================
+
+//
+// $height: add fixed height (must)
+// $selector: add child selector to assign "vertical-align: middle;" (optional)
+//
+
+@mixin vertical-center( $height, $selector: null ) {
+  display: block;
+  height: $height;
+
+  @if $selector != null {
+    #{$selector} {
+      vertical-align: middle;
+    }
+  }
+
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+}
+
+// 09. Position
+// ===========================================
+
+@mixin position( $position: 'absolute', $width: null, $height: null, $top: null, $right: null, $bottom: null, $left: null, $index: null ) {
+  position: #{$position};
+  width: $width;
+  height: $height;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  z-index: $index;
+}
+
+// 10. Background Position
+// ===========================================
+
+@mixin background( $color: null, $repeat: null, $size: null, $position: null, $attachment: null ) {
+  background-color: $color;
+  background-repeat: #{$repeat};
+  background-size: #{$size};
+  background-attachment: #{$attachment};
+  background-position: $position;
+}
+
+// 11. Background Opacity
+// ===========================================
+
+@mixin background-opacity( $color, $opacity: 0.85 ) {
+  background-color: $color;
+  background-color: rgba($color, $opacity);
+}
+
+// 12. Pixel to Percentage
+// ===========================================
+
+//
+// Depending on the container's width
+// Can set $container to any value, e.g. 1000px
+// And the percentage will be calculated
+// based on container's value
+//
+
+@function per-calc( $width, $container: $container__width ) {
+  @return percentage($width / $container);
+}
+
+// 13. Center with Width
+// ===========================================
+
+//
+// @param $width specifies  the width you want for an element
+// @param $margin-left      set either to left, right or auto, default 'auto'
+// @param $margin-right     set either to left, right or auto, default 'auto'
+//
+
+@mixin center-with-width( $width, $margin-left: auto, $margin-right: auto ) {
+  max-width: $width;
+  margin-left: $margin-left;
+  margin-right: $margin-right;
+}
+
+// 14. Grids
+// ===========================================
+
+//
+// This mixin will create a grid with the number of columns given. Columns
+// numbers will be in English e.g. 'five' or 'seven' and up to 'twelve'
+//
+// @param   $number     enter the number of columns you want to create.
+// @param   $gutter     enter the gutter value in pixels or percentage.
+// @param   $row-class  enter the class for your row, e.g. 'w-row'
+//
+// Example
+//
+// @include grid( 6, 10px, '.w-row' );
+//
+
+@mixin grid( $number, $gutter, $row-class, $numeric: true ) {
+  $column-number: $number + 1;
+  $columns: (
+    "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"
+  );
+
+  .#{$row-class} {
+    @extend %clearfix;
+    margin-left: -$gutter;
+    margin-right: -$gutter;
+    margin-bottom: $gutter;
+
+  }
+
+  .enso-col {
+    float: left;
+    padding-left: $gutter;
+    padding-right: $gutter;
+
+    // Apply the styling only on desktop.
+    @include bp-medium-min {
+      @for $i from 1 to $column-number {
+        // Check if $numeric is true.
+        @if $numeric {
+          &--#{$i} {
+            width: ( 100% * $i ) / $number;
+          }
+        // else.
+        } @else {
+          &--#{ nth( $columns, $i ) } {
+            width: ( 100% * $i ) / $number;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 15. Font Size Pixel to Percentage
+// ===========================================
+
+@function font-per-base ( $size, $base: $font__size--root ) {
+  @return percentage($size / $base);
+}
+
+// 16. Remove the unit of a length
+// ===========================================
+
+@function strip-unit ( $number ) {
+  @if type-of( $number ) == 'number' and not unitless( $number ) {
+    @return $number / ( $number * 0 + 1 );
+  }
+
+  @return $number;
+}
+
+// 17. Flexbox Container
+// ===========================================
+
+@mixin flex-container( $hor: center, $ver: center, $bp: 'medium' ) {
+  @include display( table-cell );
+  @include display( flex );
+  @include justify-content( $hor );
+  @include align-items( $ver );
+
+  @if $bp == 'large' {
+    @include bp-large {
+      @include flex-direction( column );
+    }
+  } @else if $bp == 'medium' {
+    @include bp-medium {
+      @include flex-direction( column );
+    }
+  } @else if $bp == 'small' {
+    @include bp-small {
+      @include flex-direction( column );
+    }
+  } @else if $bp == 'extra-small' {
+    @include bp-medium {
+      @include flex-direction( column );
+    }
+  }
+
+  // Remove the clearfix.
+  &:before, &:after {
+    content: '';
+    display: none;
+  }
+}
+
+// 18. Primary Gradient
+// ===========================================
+
+@mixin primary-gradient() {
+  background-color: mix( #00deff, #0050ff );
+  background: #00deff;
+  background: -moz-linear-gradient(324deg,  #00deff 0%, #0050ff 100%);
+  background: -webkit-linear-gradient(324deg,  #00deff 0%,#0050ff 100%);
+  background: linear-gradient(324deg,  #00deff 0%,#0050ff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00deff', endColorstr='#0050ff',GradientType=1 );
+}
+
+// 19. Aspect Ratio
+// ===========================================
+
+@function aspect-ratio( $value ) {
+
+  $width: nth( $value, 1 );
+  $height: $width;
+
+  @if length( $value ) > 1 {
+    $height: nth( $value, 2 );
+  }
+
+  @return ( $height / $width ) * 100%;
+
+}
+
+// 20. Single Button
+// ===========================================
+
+@mixin single-button( $bg, $bg-hover, $text: #fff ) {
+  background-color: $bg;
+  border-bottom-color: $bg-hover;
+  color: $text;
+
+  &:hover,
+  &:active {
+    color: $text;
+    background-color: $bg-hover;
+    border-bottom-color: darken( $bg-hover, 5% );
+  }
+
+  &:disabled {
+    background-color: $bg !important;
+    border-bottom-color: $bg-hover !important;
+  }
+}
