@@ -22,7 +22,5 @@
     "url": "https://github.com/zeshanshani/scss-mixins-variables/issues"
   },
   "homepage": "https://github.com/zeshanshani/scss-mixins-variables#readme",
-  "dependencies": {
-    "npm": "^5.8.0"
-  }
+  "dependencies": {}
 }
