@@ -8,6 +8,7 @@
 // ===========================================
 // Table of Contents
 //
+// 00. Variables
 // 01. Spacing
 // 02. Background Image
 //    i. Background Image Full
@@ -37,6 +38,24 @@
 // 20. Single Button
 //
 // ===========================================
+
+// Variables
+$primary                 : #00deff !default;
+$secondary               : #0050ff !default;
+
+$path--image             : 'assets/images' !default;
+$path--font              : 'assets/fonts' !default;
+
+$font__size--root        : 16px !default;
+
+$breakpoint__extra-large : 1400px !default;
+$breakpoint__large       : 991px !default;
+$breakpoint__medium      : 767px !default;
+$breakpoint__small       : 480px !default;
+$breakpoint__extra-small : 320px !default;
+
+$container__width        : 1040px !default;
+
 
 // 01. Spacing
 // ===========================================
@@ -536,14 +555,14 @@
 // 15. Font Size Pixel to Percentage
 // ===========================================
 
-@function font-per-base ( $size, $base: $font__size--root ) {
+@function font-per-base( $size, $base: $font__size--root ) {
   @return percentage($size / $base);
 }
 
 // 16. Remove the unit of a length
 // ===========================================
 
-@function strip-unit ( $number ) {
+@function strip-unit( $number ) {
   @if type-of( $number ) == 'number' and not unitless( $number ) {
     @return $number / ( $number * 0 + 1 );
   }
@@ -589,12 +608,12 @@
 // ===========================================
 
 @mixin primary-gradient() {
-  background-color: mix( #00deff, #0050ff );
-  background: #00deff;
-  background: -moz-linear-gradient(324deg,  #00deff 0%, #0050ff 100%);
-  background: -webkit-linear-gradient(324deg,  #00deff 0%,#0050ff 100%);
-  background: linear-gradient(324deg,  #00deff 0%,#0050ff 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00deff', endColorstr='#0050ff',GradientType=1 );
+  background-color: mix( $primary, $secondary );
+  background: $primary;
+  background: -moz-linear-gradient(324deg,  $primary 0%, $secondary 100%);
+  background: -webkit-linear-gradient(324deg,  $primary 0%,$secondary 100%);
+  background: linear-gradient(324deg,  $primary 0%,$secondary 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$primary}', endColorstr='#{$secondary}', GradientType=1);
 }
 
 // 19. Aspect Ratio
