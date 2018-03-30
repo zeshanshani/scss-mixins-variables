@@ -1,0 +1,28 @@
+{
+  "name": "sass-mixins-variables",
+  "version": "1.0.0",
+  "description": "Helpful Sass (SCSS) mixins and variables",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://zeshanshani@github.com/zeshanshani/scss-mixins-variables.git"
+  },
+  "keywords": [
+    "sass",
+    "scss",
+    "sass-mixins",
+    "sass-variables"
+  ],
+  "author": "Zeshan Ahmed",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zeshanshani/scss-mixins-variables/issues"
+  },
+  "homepage": "https://github.com/zeshanshani/scss-mixins-variables#readme",
+  "dependencies": {
+    "npm": "^5.8.0"
+  }
+}
