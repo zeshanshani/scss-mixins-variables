@@ -1,0 +1,247 @@
+// =================================================
+// assets/scss/_variables.scss
+//
+// Table of Contents:
+//
+//  1. Colors
+//  2. Font Family
+//  3. Font Size
+//  4. Line Height
+//  5. Fonts Weight
+//  6. Media Query Sizes
+//  7. Container Size
+//  8. Paths
+//  9. Border Radius
+// 10. Transitions
+// 11. Icons
+//
+// Variables for Elements
+//
+//  1. Navbar
+//  2. Logo
+//  3. Forms
+//
+// =================================================
+
+$prefix: 'enso-';
+
+// 1. Colors
+// =================================
+
+$black      : #000000;
+$white      : #ffffff;
+
+$color__primary         : #1D7BCE;
+$color__primary-hover   : darken( $color__primary, 8% );
+$color__secondary       : #3eccff;
+$color__secondary-hover : darken( $color__secondary, 8% );
+
+$color__dark            : #000;
+$color__light           : #CED4DA;
+$color__lighter         : #f1f6fa;
+$color__grey            : #919191;
+$color__grey-hover      : darken( $color__grey, 8% );
+$color__grey-light      : #B2B2B2;
+
+$color__success         : #5cb85c;
+$color__success-hover   : darken( $color__success, 8% );
+$color__danger          : #d9534f;
+$color__danger-hover    : darken( $color__danger, 8% );
+
+// Colors: Text
+$color__text--light : $color__light;
+$color__text--base  : #000;
+$color__text--dark  : $color__dark;
+
+// Colors: Headlines
+$color__headlines : $color__dark;
+
+// Colors: Links
+$color__link--base : $color__primary;
+$color__link--hover : darken( $color__primary, 8% );
+
+// Colors: Backgrounds
+$color__background--primary   : $color__primary;
+$color__background--secondary : $color__secondary;
+$color__background--dark      : $color__dark;
+$color__background--light     : $color__light;
+
+$color__background--dark-text : $white;
+
+// Colors: Forms Background Color
+$color__background--form : #ebfaff;
+
+// Colors: Line Border
+$color__border--line : #e8e8e8;
+
+// 2. Font Family
+// =================================
+
+$font__family--default    : 'Roboto', Arial, Helvetica, sans-serif;
+$font__family--sans-serif : $font__family--default;
+$font__family--headings   : $font__family--sans-serif;
+
+// 3. Font Size
+// =================================
+
+// Font Size: Base
+$font__size--root    : 16px;
+$font__size--base    : 18px;
+$font__size--small   : round( $font__size--base * 0.875 );
+$font__size--large   : round( $font__size--base * 1.25 );
+$font__size--x-large : round( $font__size--base * 1.6 );
+
+// Font Size: Buttons
+$font__size--button       : 12px;
+$font__size--button-small : round( $font__size--button * 0.8 );
+$font__size--button-large : round( $font__size--button * 1.2 );
+
+// Font Size: Inputs
+$font__size--input        : 16px;
+$font__size--input-small  : 14px;
+$font__size--input-large  : 28px;
+
+// Font Size: Headings
+$font__size--h1 : 45px;
+$font__size--h2 : 35px;
+$font__size--h3 : 25px;
+$font__size--h4 : 20px;
+$font__size--h5 : 16px;
+$font__size--h6 : 14px;
+
+// 4. Line Height
+// =================================
+
+// Line Height: Base
+$line-height--base     : 2;
+$line-height--headings : 1.3;
+
+// 5. Fonts Weight
+// =================================
+
+$font__weight--thin        : 100;
+$font__weight--extra-light : 200;
+$font__weight--light       : 300;
+$font__weight--normal      : 400;
+$font__weight--medium      : 500;
+$font__weight--semi-bold   : 600;
+$font__weight--bold        : 700;
+$font__weight--extra-bold  : 800;
+
+// 6. Media Query Sizes
+// =================================
+
+$breakpoint__extra-large : 1400px;
+$breakpoint__large       : 991px;
+$breakpoint__medium      : 767px;
+$breakpoint__small       : 480px;
+$breakpoint__extra-small : 320px;
+
+// 7. Container Size
+// =================================
+
+$container__width        : 1040px;
+$container__width--small : 746px;
+$container__gutter       : 20px;
+
+// 8. Paths
+// =================================
+
+$path--image : 'assets/images';
+$path--font  : 'assets/fonts';
+
+// 9. Margin
+// =================================
+
+$margin--base : 29px;
+
+// 9. Border Radius
+// =================================
+
+$border-radius--base  : 4px;
+$border-radius--small : 1px;
+$border-radius--large : 5px;
+
+// 10. Transitions
+// =================================
+
+$transition--extend : all ease-in-out;
+
+$transition--base   : 0.25s $transition--extend;
+$transition--fast   : 0.15s $transition--extend;
+$transition--slow   : 0.35s $transition--extend;
+$border-radius--large : 5px;
+
+// 11. Z-Indexes
+// =================================
+
+$index--base: 1;
+
+// 11. Icons
+// =================================
+
+$icons : (
+  facebook              : ( 'size': 8px 15px, 'position': 0px -64px ),
+  twitter               : ( 'size': 18px 16px, 'position': -23px -64px ),
+  linkedin              : ( 'size': 15px, 'position': -56px -64px ),
+);
+
+$icons-retina-position : (
+  facebook              : ( 'position': 0px -59px ),
+  twitter               : ( 'position': -23px -58px ),
+  linkedin              : ( 'position': -56px -59px ),
+);
+
+// =================================
+// Variables for Elements
+// =================================
+
+// 1. Navbar
+// =================================
+
+$navbar__padding          : 0px;
+$navbar__item-color       : $color__text--base;
+$navbar__item-color--hover: null;
+$navbar__font-size        : $font__size--small;
+$navbar__font-weight      : $font__weight--medium;
+$navbar__item-padding     : 13px 0px;
+
+// 2. Logo
+// =================================
+
+$logo__color      : $color__text--base;
+$logo__font-size  : 26px;
+$logo__font-weight: $font__weight--bold;
+$logo__line-height: 30px;
+$logo__padding    : 10px 0;
+$logo__margin     : 0;
+
+// 3. Forms
+// =================================
+
+$form__placeholder: #CED4DA;
+
+// 4. Footer
+// =================================
+
+$footer__text-color: #292929;
+
+$footer__link-color: #707070;
+$footer__link-color-hover: darken( #707070, 8% );
+
+// Top Footer
+$footer__top-font-size: 16px;
+
+// Bottom Footer
+$footer__bottom-font-size: 14px;
+
+// 4. Content
+// =================================
+
+// Header
+$content__header-title-font-size: 60px;
+$content__header-title-margin: 0 0 23px;
+
+// Meta
+$content__meta-font-size: round( $font__size--base * 0.889 );
+$content__meta-margin: 0px 0px 20px;
