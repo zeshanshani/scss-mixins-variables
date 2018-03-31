@@ -1,6 +1,6 @@
 {
   "name": "sass-mixins-variables",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Helpful Sass (SCSS) mixins and variables",
   "main": "index.js",
   "scripts": {
