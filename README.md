@@ -43,43 +43,6 @@ $container__width        : 1040px
 ## Mixins & Functions
 These are the available mixins you can use in your SCSS project.
 
-- spacing
-- bg-img-full
-- bg-img-only
-- all-colors
-- all-headings-colors
-- calc-rem
-- calc-em
-- font-size
-- margin
-- padding
-- size-rem
-- width
-- height
-- media
-- bp-x-large
-- bp-large
-- bp-medium
-- bp-small
-- bp-x-small
-- bp-x-large-min
-- bp-large-min
-- bp-medium-min
-- bp-small-min
-- bp-x-small-min
-- opacity
-- vertical-center
-- position
-- background
-- background-opacity
-- background
-- FUNCTION per-calc
-- center-with-width
-- grid
-- flex-container
-- primary-gradient
-- single-button
-
 Name | Type | Description
 ------ | ----- | -----
 spacing | mixin | Creates spacing classes for paddings and margins
