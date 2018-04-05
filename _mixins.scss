@@ -146,6 +146,32 @@ $container__width        : 1040px !default;
   }
 }
 
+// Property Rem
+// ===========================================
+
+//
+// This mixin generates properties with 'rem' unit
+// with a fallback 'px' unit for old browsers.
+//
+
+@mixin prop-rem( $prop, $px ) {
+  #{$prop}: $px;
+  #{$prop}: calc-rem( $px);
+}
+
+// Property Em
+// ===========================================
+
+//
+// This mixin generates properties with 'em' unit
+// with a fallback 'px' unit for old browsers.
+//
+
+@mixin prop-em( $prop, $px ) {
+  #{$prop}: $px;
+  #{$prop}: calc-em( $px);
+}
+
 // 05. Units
 // ===========================================
 
