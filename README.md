@@ -52,6 +52,8 @@ Name | Type | Description
 `all-headings-colors` | mixin | Changes color of all the headings from h1-h6
 `calc-rem` | funciton | Convert pixel into 'rem'. Root size is based on $font__size--root value. Multiple values are accepted, e.g., 10px 20px 10px 20px
 `calc-em` | funciton | Convert pixel into 'em'. Root size is based on $font__size--root value. Multiple values are accepted, e.g., 10px 20px 10px 20px
+`prop-rem` | mixin | Automatically generates CSS properties with 'rem' unit with a fallback 'px' unit for old browsers. e.g., `@include prop-rem( line-height, 50px );`
+`prop-em` | mixin | Automatically generates CSS properties with 'em' unit with a fallback 'px' unit for old browsers. e.g., `@include prop-em( line-height, 50px );`
 `font-size` | mixin | Generates font-size from pixel into 'rem' with 'px' as fallback.
 `margin` | mixin | Generates margin from pixel into 'rem' with 'px' as fallback. e.g., `@include margin( 10px 20px );`
 `padding` | mixin | Generates padding from pixel into 'rem' with 'px' as fallback. e.g., `@include padding( 10px 20px );`
