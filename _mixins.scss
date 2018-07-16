@@ -36,6 +36,7 @@
 // 18. Primary Gradient
 // 19. Aspect Ratio
 // 20. Single Button
+// 21. Truncate Line
 //
 // ===========================================
 
@@ -677,4 +678,16 @@ $container__width        : 1040px !default;
     background-color: $bg !important;
     border-bottom-color: $bg-hover !important;
   }
+}
+
+// 21. Truncate Line
+// ===========================================
+
+@mixin truncate-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
 }
