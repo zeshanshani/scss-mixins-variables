@@ -701,5 +701,5 @@ $container__width        : 1040px !default;
 
 @mixin prop-rem( $prop, $px ) {
   #{$prop}: $px;
-  #{$prop}: calc-rem( $px);
+  #{$prop}: calc-rem( $px );
 }

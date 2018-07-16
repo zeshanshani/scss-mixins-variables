@@ -85,3 +85,5 @@ Name | Type | Description
 `primary-gradient` | mixin | _Description yet to be provided._
 `aspect-ratio` | mixin | Convert pixel into aspect ratio in percentage. e.g., `aspect-ratio( 16px 9px );` will convert into `56.25%`
 `single-button` | mixin | _Description yet to be provided._
+`truncate-line` | mixin | Adds ... at the end of the line. Stoping it to go into the next line. Does not accept any arguments. ._
+`prop-rem` | mixin | Convert pixel into 'rem' for any given CSS property name as the first argument. Root size is based on $font__size--root value. Multiple values are accepted, e.g., 10px 20px 10px 20px ._
