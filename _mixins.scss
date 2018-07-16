@@ -37,6 +37,7 @@
 // 19. Aspect Ratio
 // 20. Single Button
 // 21. Truncate Line
+// 22. Property Rem
 //
 // ===========================================
 
@@ -690,4 +691,15 @@ $container__width        : 1040px !default;
 }
 
 
+// 22. Property Rem
+// ===========================================
+
+//
+// This mixin generates properties with 'rem' unit
+// with a fallback 'px' unit for old browsers.
+//
+
+@mixin prop-rem( $prop, $px ) {
+  #{$prop}: $px;
+  #{$prop}: calc-rem( $px);
 }
